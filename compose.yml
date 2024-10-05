@@ -1,0 +1,6 @@
+ services:
+   api-mysql-cc:
+     build: ./api-mysql-cc
+     image: yoyoyopi/api-mysql-cc
+     ports:
+       - 8000:8020
