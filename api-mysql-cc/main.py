@@ -4,10 +4,10 @@ import schemas
 
 app = FastAPI()
 
-host_name = "3.84.100.250"
-port_number = "8900"
+host_name = "54.158.142.164"
+port_number = "8005"
 user_name = "root"
-password_db = "utec"
+password_db = "Utec"
 database_name = "api-mysql-cc"
 
 # Get echo test for load balancer's health check
