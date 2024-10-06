@@ -39,7 +39,7 @@ def get_employee(id: int):
 
 # Add a new employee
 @app.post("/employees")
-def add_employee(item:schemas.Item):
+def add_employee(item: schemas.Employee):
     mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)
     name = item.name
     cargo = item.cargo
@@ -54,9 +54,10 @@ def add_employee(item:schemas.Item):
     mydb.close()
     return {"message": "Employee added successfully"}
 
+
 # Modify an employee
 @app.put("/employees/{id}")
-def update_employee(id: int, item: schemas.Item):
+def update_employee(id: int, item: schemas.Employee): 
     mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)
     name = item.name
     cargo = item.cargo
@@ -70,6 +71,7 @@ def update_employee(id: int, item: schemas.Item):
     cursor.close()
     mydb.close()
     return {"message": "Employee modified successfully"}
+
 
 # Delete an employee by ID
 @app.delete("/employees/{id}")
@@ -106,16 +108,17 @@ def get_local(id: int):
 
 # Assign employee to local
 @app.post("/assign_employee_to_local")
-def assign_employee_to_local(local_id: int, employee_id: int):
+def assign_employee_to_local(item: schemas.AssignEmployeeToLocal):
     mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)
     cursor = mydb.cursor()
     sql = "INSERT INTO Trabajan (ID_local, ID_empleado) VALUES (%s, %s)"
-    val = (local_id, employee_id)
+    val = (item.ID_local, item.ID_empleado)  # Cambiado a item.ID_local y item.ID_empleado
     cursor.execute(sql, val)
     mydb.commit()
     cursor.close()
     mydb.close()
-    return {"message": f"Employee {employee_id} assigned to local {local_id} successfully"}
+    return {"message": f"Employee {item.ID_empleado} assigned to local {item.ID_local} successfully"}
+
 
 # Get employees by local
 @app.get("/local/{id}/employees")
