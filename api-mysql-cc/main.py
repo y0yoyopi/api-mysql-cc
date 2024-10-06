@@ -4,7 +4,7 @@ import schemas
 
 app = FastAPI()
 
-host_name = "100.27.62.167"
+host_name = "34.204.79.75"
 port_number = "8900"
 user_name = "root"
 password_db = "utec"
